@@ -2,8 +2,7 @@ package lesson3_Task1;
 
 public class MyRunnablePing implements Runnable{
     private static final Object mon = new Object();
-    private static volatile String currentLine1 = "Первый игрок отбил" + " Ping";
-//    private volatile String currentLine2 = "Второй игрок отбил" + " Pong";
+    private static volatile String Player1 = "Первый игрок отбил" + " Ping";
 
 
     @Override
@@ -11,7 +10,7 @@ public class MyRunnablePing implements Runnable{
         for (int i = 0; i < 10; i++) {
             System.out.println("Первый игрок отбил" + " Ping");
             try {
-                Thread.sleep(3000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -22,11 +21,11 @@ public class MyRunnablePing implements Runnable{
         synchronized (mon) {
             try {
                 for (int i = 0; i < 10; i++) {
-                    while (currentLine1 != "ping") {  //  было ping
+                    while (Player1 != "ping") {
                         mon.wait();
                     }
-                    System.out.println("ping");      //  было  ping
-                    currentLine1 = "pong";           // было  pong 1
+                    System.out.println("ping");
+                    Player1 = "pong";
                     mon.notify();
                 }
             } catch (InterruptedException e) {
@@ -34,4 +33,5 @@ public class MyRunnablePing implements Runnable{
             }
         }
     }
+
 }
